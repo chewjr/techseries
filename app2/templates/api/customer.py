@@ -24,7 +24,7 @@ class User(db.Model):
     age = db.Column(db.Integer, nullable=False)
     risk = db.Column(db.Float, nullable=False)
 
-    def __init__(self, cid, name):
+    def __init__(self, id, password, created_at, first_name, last_name, occupation, email, age, risk):
         self.id = id
         self.password = password
         self.created_at = created_at
@@ -62,6 +62,35 @@ def authenticate():
         result['message'] = 'User not found'
     print(result)
     return jsonify(result), 200
+
+
+# authenticate user when logging in
+@app.route("/createuser", methods=['POST'])
+def createuser():
+    try: 
+
+        user = request.get_json()
+
+        user_id = user["id"]
+        password = user["password"]
+        created_at = 'hardcode' # hardcode
+        first_name = user['first_name']
+        last_name = user['last_name']
+        occupation = user["occupation"]
+        email = user['email']
+        age = user['age']
+        risk = user['risk']
+        
+
+        new_user = User(user_id, created_at, category, name, amount)
+        db.session.add(new_user)
+        db.session.commit()
+        # new entry
+        return jsonify({{"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the budget database."}) , 500
+
 
 if __name__ == "__main__": 
     app.run(port=5001, debug=True)

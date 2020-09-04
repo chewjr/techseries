@@ -1,0 +1,176 @@
+# Import Flask and initialize a Flask application
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+from os import environ
+
+import datetime
+import urllib, json, requests
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
+
+db = SQLAlchemy(app)
+CORS(app)
+
+class Goal(db.Model):
+    __tablename__ = 'goal'
+
+    user_id = db.Column(db.String(20), primary_key=True, nullable=False)
+    goal_id = db.Column(db.String(20), primary_key=True, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    category = db.Column(db.String(30), nullable = False)
+    amount = db.Column(db.Float, nullable = False)
+    deadline = db.Column(db.DateTime, nullable=False)
+
+    def __init__(self, user_id, goal_id, created_at, category, amount, deadline):
+        self.user_id = user_id
+        self.goal_id = goal_id
+        self.created_at = created_at
+        self.category = category #hardcode
+        self.amount = amount
+        self.deadline = deadline
+
+
+    def json(self):
+        return {"user_id": self.user_id, "goal_id": self.goal_id, "created_at": self.created_at, "category": self.category, "amount": self.amount, "deadline": self.deadline}
+
+
+# finding all goals belonging to a user_id
+# all goals of user
+@app.route("/goal/<string:user_id>", methods=["GET"])
+def get_all_by_user_id(user_id):
+
+    goal = Goal.query.filter_by(user_id = user_id)
+    if goal:
+        listOfgoal = []
+        for goal in Goal.query.filter_by(user_id = user_id):
+            res = {}
+            res['goal_id'] = goal.goal_id
+            res['created_at'] = goal.created_at #hardcode?
+            res['category'] = goal.category
+            res['amount'] = goal.amount
+            res['deadline'] = goal.deadline
+            listOfgoal.append(res)
+        return jsonify({"goal": listOfgoal}), 200
+        # return jsonify({"goal": [goal.json() for goal in goal.query.filter_by(user_id = user_id)]}), 200
+    else:
+        return jsonify({"message": "No goal found."}), 500
+
+
+#adding goals
+@app.route("/add_goal", methods =['POST'])
+def add_goal_into_goal_db():
+    try: 
+
+        go = request.get_json()
+
+        user_id = go["user_id"]
+        goal_id =go["goal_id"]
+        created_at = go["created_at"]
+        category = go['category']
+        amount = go['amount']
+        deadline = go['deadline']
+
+        # budget_exist = Budget.query.filter_by(user_id = user_id, created_at = created_at ).first()
+
+        # if budget_exist:
+        #     budget_exist_json = budget_exist.json()
+        #     budget_exist_json = dict(budget_exist_json)
+        #     # Budget_numshare = budget_exist_json['numshare'] 
+        #     # budget_exist.numshare = int(Budget_numshare) + int(qty)
+        #     Budget_totalprice = budget_exist_json['totalprice']
+        #     budget_exist.totalprice = float(Budget_totalprice) + float(totalprice)
+        #     budget_exist.Budgetprice = (float(Budget_totalprice) + float(totalprice)) / (budget_exist_json['numshare'] + int(qty))
+            
+            
+        #     db.session.commit()
+        #     # new entry
+        #     return jsonify({"budget": [budget.json() for budget in Budget.query.filter_by(user_id = user_id, created_at = created_at)]}), 200
+
+        # else:
+        new_go = Goal(user_id, goal_id, created_at, category, amount, deadline)
+        db.session.add(new_go)
+        db.session.commit()
+        # new entry
+        #might need to change this to a string
+        return jsonify({"message":"Success"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the goal database."}) , 500
+
+
+
+
+@app.route("/remove_goal", methods =['POST'])
+def remove_goal_from_goal_db():
+
+    try: 
+
+        remove_go = request.get_json()
+
+        user_id = remove_go["user_id"]
+        goal_id = remove_go["goal_id"]
+        
+
+        goal_exist = Goal.query.filter_by(user_id=user_id, goal_id=goal_id).first()
+        if goal_exist:
+            Goal.query.filter_by(user_id = user_id, goal_id=goal_id).delete()
+            # db.session.delete()  ##try this if .delete() doesnt work
+            db.session.commit()
+            return jsonify({"message": "Goal has been removed from goal database"}), 200
+            # else:
+            #     budget_exist.numshare -= qty
+            #     budget_exist.totalprice = budget_exist.numshare * budget_exist.Budgetprice
+            #     db.session.commit()
+            #     return jsonify({"message": "Budget is removed from Budget database"}), 200
+        else:
+            return jsonify({"message":"This entry does not exist in the goal database."}) , 500    
+
+    except:
+        return jsonify({"message":"An error occurred removing this entry in the goal database."}) , 500
+
+
+
+
+# retrieving all Budget with the cid and created_at from json request (sell) and checking if
+# the qty user wants to sell is less than or equals to the qty he owns
+# @app.route("/hasEnoughBudget", methods=['POST'])
+# def hasEnoughBudget():
+   
+#     check_Budget = request.get_json()
+#     user_id = check_Budget['user_id']
+#     created_at = check_Budget['created_at']
+    
+#     Budget = Budget.query.filter_by(user_id=user_id, created_at=created_at).first()
+    
+#     if Budget:
+        
+#         Budget = Budget.json()
+#         Budget = dict(Budget)
+        
+#         user_qty = Budget["numshare"]
+        
+#         if user_qty >= qty:
+#             return jsonify({"hasEnoughBudget": "True"}), 200
+#     return jsonify({"hasEnoughBudget": "False"}), 500
+
+# @app.route("/retrieve_BudgetQty", methods=['GET'])
+# def get_qty_by_user_id_created_at():
+#     user_id = request.args.get('user_id')
+#     created_at = request.args.get('created_at')
+#     Budget = Budget.query.filter_by(user_id=user_id, created_at=created_at).first()
+#     if Budget:    
+#         Budget = Budget.json()
+#         Budget = dict(Budget)
+        
+#         user_qty = Budget["numshare"]
+#         return jsonify({"numshare": user_qty}), 200
+#     return jsonify({"status": "error", "message": "No Budget found for user"}), 500
+    
+
+if __name__ == '__main__':
+    app.run(port=5003, debug=True) 
