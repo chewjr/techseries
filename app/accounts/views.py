@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login
 from django import forms
+from django.contrib.auth.hashers import check_password
 
 
 # project
@@ -18,18 +19,29 @@ def register(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+            user = authenticate(username=username, password=password)
+            if not user:
                 u = User.objects.create_user(username, email, password)
                 # add to group
-                expense_manager = Group.objects.get(name='expense_manager')
-                expense_manager.user_set.add(u)
+                # expense_manager = Group.objects.get(name='expense_manager')
+                # expense_manager.user_set.add(u)
 
                 user = authenticate(username=username, password=password)
                 login(request, user)
                 return redirect('expense_manager:dashboard')
             else:
-                raise forms.ValidationError(
-                    'username with that email or password already exists')
+                stored_password = check_password(password, user.password)
+                if stored_password:
+                    raise forms.ValidationError(
+                        'You already registered an account. Please log in.'
+                    )
+                else:
+                    raise forms.ValidationError(
+                        'Username has been taken. Try another username.'
+                    )
+        raise forms.ValidationError(
+            'Registration has failed. Please try again.'
+        )
     else:
         form = UserRegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
