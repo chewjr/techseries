@@ -1,6 +1,15 @@
 /* sldier */
-#ex1Slider .slider-selection {
-	background: #BABABA;
+#risk {
+  margin-top: 15px;
+}
+
+.slider-range-1 {
+  float: left;
+}
+
+.slider-range-2 {
+  float: right;
+  text-align: right;
 }
 
 /* ==========================================================================

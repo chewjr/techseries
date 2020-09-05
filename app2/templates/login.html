@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="container-login100-form-btn" style="margin-top: 10px;">
-                        <button onclick=" location.href = 'homepage.html'" class="login100-form-btn-2">
+                        <button onclick=" location.href = 'createacc.html'" class="login100-form-btn-2">
 							New User Sign Up
 						</button>
                     </div>
@@ -111,7 +111,8 @@
                             serviceURL, {
                                 method: 'POST',
                                 headers: {
-                                    "Content-Type": "application/json"
+									"Content-Type": "application/json",
+									
                                 },
                                 body: JSON.stringify({
                                     "id": id,
@@ -120,7 +121,7 @@
                             }
                         );
 					const data = await response.json();
-					// console.log(data);
+					console.log(data);
                     if (response.ok) {
                         if (data.status == 'success') {
                             // store userid in session 
@@ -133,8 +134,9 @@
                     }
                 } catch (error) {
 					// showError('Unable to authenticate user');
-					console.log(error);
-					alert('Error authenticating, please try again');
+					// console.log(error);
+					// alert('Error authenticating, please try again');
+					alert(error);
                 }
             }
         )
