@@ -110,6 +110,44 @@ def remove_budget_from_budget_db():
     except:
         return jsonify({"message":"An error occurred removing this entry in the budget database."}) , 500
 
+#edit budget
+
+@app.route("/edit_budget", methods =['POST'])
+def edit_budget_into_budget_db():
+    try: 
+
+        bud = request.get_json()
+
+        user_id = bud["user_id"]
+        created_at = bud["created_at"]
+        category = bud['category']
+        name = bud['name']
+        amount = bud['amount']
+
+        bud_exist = Budget.query.filter_by(user_id = user_id, created_at = created_at ).first()
+
+        if bud_exist:
+            # bud_exist_json = bud_exist.json()
+            # bud_exist_json = dict(bud_exist_json)
+            bud_exist.category = category
+            bud_exist.name = name
+            bud_exist.amount = amount
+            # bud_exist.numshare = int(stock_numshare) + int(qty)
+            # stock_totalprice = bud_exist_json['totalprice']
+            # bud_exist.totalprice = float(stock_totalprice) + float(totalprice)
+            # bud_exist.stockprice = (float(stock_totalprice) + float(totalprice)) / (bud_exist_json['numshare'] + int(qty))
+            
+            
+            db.session.commit()
+            # new entry
+            return jsonify({"message":"Successfully edited."}), 200
+
+    except:
+        return jsonify({"message":"An error occurred editing this entry in the budget database."}) , 500
+
+
+
+
 
 
 
