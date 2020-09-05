@@ -5,8 +5,9 @@ from datetime import datetime
 from os import environ
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/techseries'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:3306/techseries'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
 CORS(app)
@@ -50,7 +51,7 @@ def authenticate():
     password = data['password']
 
     result = {}
-    user = user.query.filter_by(id=id).first()
+    user = User.query.filter_by(id=id).first()
 
     if user:
         if password == user.password:

@@ -9,9 +9,9 @@ import urllib, json, requests
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/techseries'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
+# app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
 CORS(app)
@@ -19,11 +19,11 @@ CORS(app)
 class Goal(db.Model):
     __tablename__ = 'goal'
 
-    user_id = db.Column(db.String(20), primary_key=True, nullable=False)
-    goal_id = db.Column(db.String(20), primary_key=True, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
-    category = db.Column(db.String(30), nullable = False)
-    amount = db.Column(db.Float, nullable = False)
+    user_id = db.Column(db.String, primary_key=True, nullable=False)
+    goal_id = db.Column(db.String, primary_key=True, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    category = db.Column(db.String, nullable = False)
+    amount = db.Column(db.Float(precision=2), nullable = False)
     deadline = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, user_id, goal_id, created_at, category, amount, deadline):
