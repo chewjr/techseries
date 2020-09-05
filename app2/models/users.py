@@ -94,3 +94,383 @@ def createuser():
 
 if __name__ == "__main__": 
     app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
+        db.session.commit()
+        # new entry
+        return jsonify({"message":"Account successfully created"}), 200
+
+    except:
+        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+
+
+if __name__ == "__main__": 
+    app.run(port=5001, debug=True)
