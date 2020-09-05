@@ -129,43 +129,33 @@ def remove_expenses_from_expenses_db():
         return jsonify({"message":"An error occurred removing this entry in the expenses database."}) , 500
 
 
+#edit expenses
 
+@app.route("/edit_expenses", methods =['POST'])
+def edit_expenses_into_expenses_db():
+    try: 
 
-# retrieving all Budget with the cid and created_at from json request (sell) and checking if
-# the qty user wants to sell is less than or equals to the qty he owns
-# @app.route("/hasEnoughBudget", methods=['POST'])
-# def hasEnoughBudget():
-   
-#     check_Budget = request.get_json()
-#     user_id = check_Budget['user_id']
-#     created_at = check_Budget['created_at']
-    
-#     Budget = Budget.query.filter_by(user_id=user_id, created_at=created_at).first()
-    
-#     if Budget:
-        
-#         Budget = Budget.json()
-#         Budget = dict(Budget)
-        
-#         user_qty = Budget["numshare"]
-        
-#         if user_qty >= qty:
-#             return jsonify({"hasEnoughBudget": "True"}), 200
-#     return jsonify({"hasEnoughBudget": "False"}), 500
+        edit_exp = request.get_json()
 
-# @app.route("/retrieve_BudgetQty", methods=['GET'])
-# def get_qty_by_user_id_created_at():
-#     user_id = request.args.get('user_id')
-#     created_at = request.args.get('created_at')
-#     Budget = Budget.query.filter_by(user_id=user_id, created_at=created_at).first()
-#     if Budget:    
-#         Budget = Budget.json()
-#         Budget = dict(Budget)
-        
-#         user_qty = Budget["numshare"]
-#         return jsonify({"numshare": user_qty}), 200
-#     return jsonify({"status": "error", "message": "No Budget found for user"}), 500
-    
+        user_id = edit_exp["user_id"]
+        created_at = edit_exp["created_at"]
+        category = edit_exp['category']
+        name = edit_exp['name']
+        amount = edit_exp['amount']
+
+        exp_exist = Expenses.query.filter_by(user_id = user_id, created_at = created_at).first()
+
+        if exp_exist:
+            exp_exist.category = category
+            exp_exist.name = name
+            exp_exist.amount = amount
+
+            db.session.commit()
+            # new entry
+            return jsonify({"expenses": [expenses.json() for expenses in Expenses.query.filter_by(user_id = user_id, created_at = created_at)]}), 200
+            
+    except:
+        return jsonify({"message":"An error occurred editing this entry in the expenses database."}) , 500
 
 if __name__ == '__main__':
     app.run(port=5002, debug=True) 

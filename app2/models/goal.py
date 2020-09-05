@@ -134,43 +134,41 @@ def remove_goal_from_goal_db():
         return jsonify({"message":"An error occurred removing this entry in the goal database."}) , 500
 
 
+#edit goal
 
+@app.route("/edit_goal", methods =['POST'])
+def edit_goal_into_goal_db():
+    try: 
 
-# retrieving all Budget with the cid and created_at from json request (sell) and checking if
-# the qty user wants to sell is less than or equals to the qty he owns
-# @app.route("/hasEnoughBudget", methods=['POST'])
-# def hasEnoughBudget():
-   
-#     check_Budget = request.get_json()
-#     user_id = check_Budget['user_id']
-#     created_at = check_Budget['created_at']
-    
-#     Budget = Budget.query.filter_by(user_id=user_id, created_at=created_at).first()
-    
-#     if Budget:
-        
-#         Budget = Budget.json()
-#         Budget = dict(Budget)
-        
-#         user_qty = Budget["numshare"]
-        
-#         if user_qty >= qty:
-#             return jsonify({"hasEnoughBudget": "True"}), 200
-#     return jsonify({"hasEnoughBudget": "False"}), 500
+        edit_goal = request.get_json()
 
-# @app.route("/retrieve_BudgetQty", methods=['GET'])
-# def get_qty_by_user_id_created_at():
-#     user_id = request.args.get('user_id')
-#     created_at = request.args.get('created_at')
-#     Budget = Budget.query.filter_by(user_id=user_id, created_at=created_at).first()
-#     if Budget:    
-#         Budget = Budget.json()
-#         Budget = dict(Budget)
-        
-#         user_qty = Budget["numshare"]
-#         return jsonify({"numshare": user_qty}), 200
-#     return jsonify({"status": "error", "message": "No Budget found for user"}), 500
-    
+        user_id = edit_goal["user_id"]
+        goal_id = edit_goal["goal_id"]
+        # created_at = edit_goal["created_at"]
+        category = edit_goal['category']
+        amount = edit_goal['amount']
+        deadline = edit_goal['deadline']
+
+        goal_exist = Goal.query.filter_by(user_id = user_id, goal_id = goal_id).first()
+
+        if goal_exist:
+            goal_exist.category = category
+            goal_exist.amount = amount
+            goal_exist.deadline = deadline
+
+            db.session.commit()
+            # new entry
+            return jsonify({"goal": [goal.json() for goal in Goal.query.filter_by(user_id = user_id, goal_id = goal_id)]}), 200
+
+        # else:
+        #     new_bud = Stock(username,ticker, qty, stockprice, totalprice)
+        #     db.session.add(new_bud)
+        #     db.session.commit()
+        #     # new entry
+        #     return jsonify({"stock": [stock.json() for stock in Stock.query.filter_by(username = username, ticker = ticker)]}), 200
+
+    except:
+        return jsonify({"message":"An error occurred editing this entry in the goal database."}) , 500
 
 if __name__ == '__main__':
     app.run(port=5003, debug=True) 
