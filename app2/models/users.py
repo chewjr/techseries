@@ -1,15 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from datetime import datetime
-from os import environ
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/techseries'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:3306/techseries'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 
 class User(db.Model):
     __tablename__ = "user"
@@ -44,13 +45,14 @@ class User(db.Model):
 
 # authenticate user when logging in
 @app.route("/authenticate", methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def authenticate():
     data = request.get_json()
     id = data['id']
     password = data['password']
 
     result = {}
-    user = user.query.filter_by(id=id).first()
+    user = User.query.filter_by(id=id).first()
 
     if user:
         if password == user.password:
@@ -66,30 +68,39 @@ def authenticate():
 
 # create new user and insert into database
 @app.route("/createuser", methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def createuser():
+    result = {}
     try: 
-
         user = request.get_json()
 
         user_id = user["id"]
         password = user["password"]
-        created_at = '2020-09-05 00:00:00' # hardcode
+        created_at = datetime.now()
         first_name = user['first_name']
         last_name = user['last_name']
         occupation = user["occupation"]
         email = user['email']
         age = user['age']
         risk = user['risk']
-        
+
+        query = User.query.filter_by(id=user_id).first()
+        if query:
+            result['status'] = 'error'
+            result['message'] = 'User ID taken, please try another User ID'
+            return jsonify(result), 200
+
         new_user = User(user_id, password, created_at, first_name, last_name, occupation, email, age, risk)
-        # return new_user.json(), 200
         db.session.add(new_user)
         db.session.commit()
         # new entry
-        return jsonify({"message":"Account successfully created"}), 200
-
+        result['status'] = 'success'
+        result['message'] = 'user successfully created'
+        return jsonify(result), 200
     except:
-        return jsonify({"message":"An error occurred creating this entry in the user database."}) , 500
+        result['status'] = 'error'
+        result['message'] = 'An error occurred creating this entry in the user database.'
+        return jsonify(result) , 500
 
 @app.route("/search/user=<string:user>")
 def search_user(user):
