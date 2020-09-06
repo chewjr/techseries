@@ -1,0 +1,198 @@
+<!-- requires HTML5 doctype <!doctype html> for proper rendering by the browser -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Meta “viewport” is used to make the web page responsive to the browser/device width-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Budget</title>
+
+    <!-- for font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap: Bootstrap code is loaded from content delivery network (CDN) -->
+    <!--Crossorigin=“anonymous” means you don’t send any user information to the CDN-->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- font Awesome -->
+    <script src="https://kit.fontawesome.com/e1d0118ede.js" crossorigin="anonymous"></script>
+
+    <!-- chart for budget expenses -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img src="images/logo.png" width=100px></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto navbar-center">
+                <li class="nav-item ">
+                    <a class="nav-link" href="./dashboard.html">Home </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="./budget.html">Budget Tracker<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Goal Based Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="./education.html">Education</a>
+                </li>
+
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="far fa-user"></i> View
+                    Profile</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- spending per month -->
+    <br/>
+    <div class="container mx-auto" style="background-color:#d7d9d8;">
+        <div class="header">
+            Hi there!
+        </div>
+        <h4>Here are your goals!</h4>
+    </div>
+
+    <!-- details table -->
+    <div class="container">
+        <table class="table" id="goal_table">
+            <thead>
+                <tr>
+                    <th scope="col">Goal Name</th>
+                    <th scope="col">Target Amount</th>
+                    <th scope="col">Target Deadline</th>
+                    <th scope="col">View Plans</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <!-- <tbody>
+                <tr>
+                    <td>Chicken Rice</td>
+                    <td class="goal_table">$5.65</td>
+                    <td></td>
+                    <td><a href=""><i class="far fa-edit"></i></a></td>
+                    <td></td>
+                    <td><a href=""><i class="far fa-trash-alt"></i></a></td>
+                </tr>
+
+
+            </tbody> -->
+        </table>
+
+        <div style= "margin-bottom: 70px;">
+            <button onClick="window.location='creategoal.html'" class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float: right;">Create New Goal</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Helper function to display error message
+        function showError(message) {
+
+            // Display an error under the main container
+            $('#error').append("<label>" + message + "</label>");
+        }
+
+        var user_id = sessionStorage["id"];
+        console.log(user_id);
+
+        // anonymous async function 
+        // - using await requires the function that calls it to be async
+        $(async() => {
+
+            $('#goal_table tbody').empty();
+            $('#error').empty()
+
+            // Change serviceURL to your own
+            var serviceURL = "http://127.0.0.1:5003/goal/" + user_id;
+
+            try {
+                const response =
+                    await fetch(
+                        serviceURL, {
+                            method: 'GET'
+                        }
+                    );
+
+
+                const goals = await response.json();
+                var goals_data = goals.goal;
+
+                if (response.ok) {
+                    // fill goal table
+                    $('#goal_table tbody').empty();
+
+                    var rows = "";
+                    for (const goal of goals_data) {
+
+                        eachRow =
+                            "<td>" + goal["category"] + "</td>" +
+                            "<td>" + goal["amount"] + "</td>" +
+                            "<td>" + goal["deadline"] + "</td>" +
+                            "<td><a href='viewplans.html'>Click Me</a></td>" +
+                            "<td><a href=''><i class='far fa-edit'></i></a></td>" +
+                            "<td><a href=''><i class='far fa-trash-alt'></i></a></td>";
+
+
+                        rows += "<tbody><tr>" + eachRow + "</tr></tbody>";
+
+                    }
+
+                    $('#goal_table').append(rows);
+
+                } else {
+                    showError('No goals were found.')
+                }
+            } catch (error) {
+                // Errors when calling the service; such as network error, 
+                // service offline, etc
+                showError
+                    ('There is a problem searching for the Goal data, please try again later.<br/>' +
+                        error);
+
+            } // error
+        });
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+
+</body>
+
+</html>

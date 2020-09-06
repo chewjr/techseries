@@ -76,9 +76,8 @@
                         <div class="p-t-15 ">
                             <button class="btn btn--radius-2 btn--blue" type="submit" id="submit">Submit</button>
                         </div>
+                    </form>
                 </div>
-
-                </form>
             </div>
         </div>
     </div>
@@ -94,7 +93,7 @@
                 var deadline = $('#targeted_deadline').val();
                 console.log(id, category, amount, deadline);
 
-                var serviceURL = "http://127.0.0.1:5003/addgoal";
+                var serviceURL = "http://127.0.0.1:5003/add_goal";
                 try {
                     const response =
                         await fetch(
@@ -106,25 +105,30 @@
                                 body: JSON.stringify({
                                     "id": id,
                                     "category": category,
-                                    "amount": amount,
+                                    "amount": parseFloat(amount),
                                     "deadline": deadline
                                 })
                             }
-                        );
+                            );
+                            console.log("hi");
+
+
                     const data = await response.json();
+                    console.log("hi")
                     if (response.ok) {
+                        console.log("hi");
                         if (data.status == 'success') {
-                            // store userid in session 
-                            // sessionStorage.setItem("id ", id);
-                            // after all runs, head to index.html
-                            window.location.href = 'homepage.html';
+
+                            // console.log("Hello");
+                            window.location = 'userprofile.html';
                         } else {
+                            // console.log("here");
                             alert(data.message);
                         }
                     }
                 } catch (error) {
                     // showError('Unable to authenticate user');
-                    console.log(error);
+                    console.log("hello");
                     alert('Error authenticating, please try again');
                 }
             }
