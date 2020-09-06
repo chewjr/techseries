@@ -52,7 +52,7 @@
 
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Budget Tracker<span class="sr-only">(current)</span></a>
-                </li>    
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">Goal Based Profile</a>
@@ -78,7 +78,7 @@
                 <script>
                     var monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"
-                        ];
+                    ];
                     var d = new Date();
                     document.write(monthNames[d.getMonth()] + " " + d.getFullYear());
                 </script>
@@ -93,7 +93,8 @@
                         <p class="budget-indicate">Indicate your total budget for this month:</p>
                         <input class="form-control budget-amount" type="text" id="budget-amount">
                         <div class="text-right">
-                            <button class="btn btn-outline-success confirm-budget w-25" id="confirm-budget">Confirm</button>
+                            <button class="btn btn-outline-success confirm-budget w-25"
+                                id="confirm-budget">Confirm</button>
                         </div>
                     </div>
                 </div>
@@ -106,7 +107,8 @@
                 <div class="row d-flex justify-content-center money-header">
                     This month's Budget:
                 </div>
-                <div class="row d-flex justify-content-center money-value" style="border-bottom: solid 1px black;" id="budget"></div>
+                <div class="row d-flex justify-content-center money-value" style="border-bottom: solid 1px black;"
+                    id="budget"></div>
             </div>
             <div class="col-6">
                 <div class="row d-flex justify-content-center" style="border-right: solid 1px black;">
@@ -242,7 +244,7 @@
                         stacked: true,
                         gridLines: {
                             color: "rgba(0, 0, 0, 0)",
-                        }, 
+                        },
                     }],
                     yAxes: [{
                         stacked: true,
@@ -272,7 +274,7 @@
                     return;
                 }
                 var serviceURL = "http://127.0.0.1:5004/budget/month/" + id;
-                let response = 
+                let response =
                     await fetch(
                         serviceURL, {
                             method: 'GET',
@@ -281,19 +283,19 @@
                             }
                         }
                     );
-                    const data = await response.json();
-                    console.log(data);
-                    if (response.ok) {
-                        if (data.status == 'success') {
-                            // store userid in session 
-                            // sessionStorage.setItem("id", id);
-                            // after all runs, head to index.html
-                            sessionStorage.setItem("budget_id", data.budget.id);
-                            document.getElementById("budget").innerText = "$" + data.budget.amount;
-                        } 
-                    } else {
-                        document.getElementById("budget").innerText = "$0.00";
+                const data = await response.json();
+                console.log(data);
+                if (response.ok) {
+                    if (data.status == 'success') {
+                        // store userid in session 
+                        // sessionStorage.setItem("id", id);
+                        // after all runs, head to index.html
+                        sessionStorage.setItem("budget_id", data.budget.id);
+                        document.getElementById("budget").innerText = "$" + data.budget.amount;
                     }
+                } else {
+                    document.getElementById("budget").innerText = "$0.00";
+                }
             } catch (error) {
                 // showError('Unable to authenticate user');
                 // console.log(error);
@@ -346,42 +348,109 @@
         var budget_id = sessionStorage["budget_id"];
         $('#confirm-budget').click(
             // call authenticate function to authenticate user when logging in
-            async() => {
+            async () => {
                 var amount = $('#budget-amount').val();
-                console.log(amount);
+
                 var serviceURL = "http://127.0.0.1:5004/budget/month/" + sessionStorage["id"];
-				var rmbme = $('#ckb1').val();
+                var rmbme = $('#ckb1').val();
                 try {
                     const response =
                         await fetch(
                             serviceURL, {
                                 method: 'GET',
                                 headers: {
-									"Content-Type": "application/json",
-									
+                                    "Content-Type": "application/json",
+
                                 }
                             }
                         );
-					const data = await response.json();
-					console.log(data);
-                    // if (response.ok) {
-                    //     if (data.status == 'success') {
-                    //         // store userid in session 
-					// 		// sessionStorage.setItem("id", id);
-                    //         // after all runs, head to index.html
-                    //         // window.location.href = 'dashboard.html';
-                    //         async() => {
-                    //             ### here ! @youxuan 
-                    //         }
-                    //     } else {
-                    //         alert('Invalid username/password, please try again');
-                    //     }
-                    // }
+                    const data = await response.json();
+                    console.log(data);
+                    if (response.ok) {
+                        if (data.status == 'success') {
+
+                            // store userid in session 
+                            // sessionStorage.setItem("id", id);
+                            // after all runs, head to index.html
+                            // window.location.href = 'dashboard.html';
+                            async () => {
+                                var serviceURL = "http://127.0.0.1:5004/edit_budget";
+                                try {
+                                    const response =
+                                        await fetch(
+                                            serviceURL, {
+                                                method: 'POST',
+                                                headers: {
+                                                    "Content-Type": "application/json",
+                                                },
+                                                body: JSON.stringify({
+                                                    "user_id": sessionStorage["id"],
+                                                    "amount": amount
+                                                })
+                                            }
+                                        );
+                                    const data = await response.json();
+                                    if (response.ok) {
+                                        if (data.status == 'success') {
+                                            // store userid in session 
+                                            // sessionStorage.setItem("id", id);
+                                            // after all runs, head to index.html
+                                            window.location.href = 'budget.html';
+                                        }
+                                    }
+                                } catch (error) {
+                                    // showError('Unable to authenticate user');
+                                    console.log(error);
+                                    alert('Error adding budget, please try again');
+                                }
+                            }
+                        } else {
+                            alert('Invalid username/password, please try again');
+                        }
+                    } else {
+                        async () => {
+                            console.log(amount);
+                            console.log(sessionStorage["id"]);
+                            var serviceURL =
+                                "http://127.0.0.1:5004/add_budget";
+                            try {
+                                const response =
+                                    await fetch(
+                                        serviceURL, {
+                                            method: 'POST',
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify({
+                                                "user_id": sessionStorage["id"],
+                                                "amount": amount
+                                            })
+                                        }
+                                    );
+                                const data = await response.json();
+                                if (response.ok) {
+                                    if (data.status == 'success') {
+                                        // store userid in session 
+                                        // sessionStorage.setItem("id", id);
+                                        // after all runs, head to index.html
+                                        window.location.href = 'budget.html';
+                                    } else {
+                                        alert(data.message);
+                                    }
+                                }
+                            } catch (error) {
+                                // showError('Unable to authenticate user');
+                                console.log(error);
+                                alert('Error adding budget, please try again');
+                            }
+                        }
+                        // alert('Invalid id, please try again');
+                    }
                 } catch (error) {
-					// showError('Unable to authenticate user');
-					// console.log(error);
-					// alert('Error authenticating, please try again');
-					alert(error);
+                    // showError('Unable to authenticate user');
+                    // console.log(error);
+                    // alert('Error authenticating, please try again');
+                    alert(error);
                 }
             }
         )
