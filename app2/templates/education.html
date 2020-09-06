@@ -11,11 +11,30 @@
     <!-- Title -->
     <title>Education</title>
 
+    <!-- for font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <style>
+        .navbar-brand,
+        .navbar-nav>li>a {
+            color: rgb(160, 158, 158) !important;
+        }
+
+        .navbar-brand:hover,
+        .navbar-nav>li>a:hover {
+            color: rgb(218, 218, 218) !important;
+        }
+
+        .bg-dark {
+            background-color: #343A40 !important ;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,47 +52,39 @@
     <header class="header-area">
 
         <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="images/logo.png" width=100px></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-family: 'Lato', sans-serif;">
+            <a class="navbar-brand" href="#"><img src="images/logo.png" width=100px></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto navbar-center">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto navbar-center">
+                    <li class="nav-item active" style="padding: 0px 20px 0px 20px; ">
+                        <a class="nav-link" href="./dashboard.html">Home </a>
+                    </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Budget Tracker
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Budget</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Expenses</a>
-                    </div>
-                </li>
+                    <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
+                        <a class="nav-link" href="./budget.html">Budget Tracker</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Goal Based Profile</a>
-                </li>
+                    <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
+                        <a class="nav-link" href="#">Goal Based Profile</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Education</a>
-                </li>
+                    <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
+                        <a class="nav-link" href="#" style="color: white !important;">Education<span class="sr-only">(current)</span></a>
+                    </li>
 
-            </ul>
+                </ul>
 
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="far fa-user"></i> View
-                    Profile</button>
-            </form>
-        </div>
-    </nav>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-user"></i> View
+                        Profile</button>
+                </form>
+            </div>
+        </nav>
 
 
     </header>
@@ -84,7 +95,7 @@
     <!-- ##### Hero Area Start ##### -->
 
     <div class="section-heading">
-        <h4><br/>Latest News</h4>
+        <h4><br />Latest News</h4>
         <div class="line"></div>
     </div>
 
@@ -93,43 +104,50 @@
             <div class="row no-gutters">
                 <div class="col-12 col-md-7 col-lg-8">
                     <div class="tab-content">
-                        
+
                         <div class="tab-pane fade show active" id="post-1" role="tabpanel" aria-labelledby="post-1-tab">
                             <!-- Single Feature Post -->
-                            <div class="single-feature-post video-post bg-img" id='news1pic' style="background-image: url(images/bg-img/news.jpg);">
+                            <div class="single-feature-post video-post bg-img" id='news1pic'
+                                style="background-image: url(images/bg-img/news.jpg);">
 
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    <a href="single-post.html" class="post-title" id='news1' style="color: #ffff"> 
+                                    <a href="single-post.html" class="post-title" id='news1' style="color: #ffff">
                                         Reunification of migrant toddlers, parents should be completed Thursday</a>
-                                    
+
                                 </div>
 
                             </div>
-                        </div>  
-                        
+                        </div>
+
                         <div class="tab-pane fade" id="post-2" role="tabpanel" aria-labelledby="post-2-tab">
                             <!-- Single Feature Post -->
-                            <div class="single-feature-post video-post bg-img" id='news2pic' style="background-image: url(images/bg-img/news.jpg);" >
+                            <div class="single-feature-post video-post bg-img" id='news2pic'
+                                style="background-image: url(images/bg-img/news.jpg);">
 
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    
-                                    <a href="single-post.html" class="post-title" id='news2' style="color: #ffff">Reunification of migrant toddlers, parents should be completed Thursday</a>
+
+                                    <a href="single-post.html" class="post-title" id='news2'
+                                        style="color: #ffff">Reunification of migrant toddlers, parents should be
+                                        completed Thursday</a>
                                 </div>
 
 
                             </div>
                         </div>
-                        
-                        <div class="tab-pane fade" id="post-3" role="tabpanel" aria-labelledby="post-3-tab" >
+
+                        <div class="tab-pane fade" id="post-3" role="tabpanel" aria-labelledby="post-3-tab">
                             <!-- Single Feature Post -->
-                            <div class="single-feature-post video-post bg-img" id='news3pic' style="background-image: url(images/bg-img/news.jpg);" >
+                            <div class="single-feature-post video-post bg-img" id='news3pic'
+                                style="background-image: url(images/bg-img/news.jpg);">
 
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    
-                                    <a href="single-post.html" class="post-title" id='news3' style="color: #ffff">Reunification of migrant toddlers, parents should be completed Thursday</a>
+
+                                    <a href="single-post.html" class="post-title" id='news3'
+                                        style="color: #ffff">Reunification of migrant toddlers, parents should be
+                                        completed Thursday</a>
 
                                 </div>
 
@@ -138,14 +156,17 @@
 
                         <div class="tab-pane fade" id="post-4" role="tabpanel" aria-labelledby="post-4-tab">
                             <!-- Single Feature Post -->
-                            <div class="single-feature-post video-post bg-img" id='news4pic' style="background-image: url(images/bg-img/news.jpg);" >
+                            <div class="single-feature-post video-post bg-img" id='news4pic'
+                                style="background-image: url(images/bg-img/news.jpg);">
 
 
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    
-                                    <a href="single-post.html" class="post-title" id='news4' style="color: #ffff">Reunification of migrant toddlers, parents should be completed Thursday</a>
-                                    
+
+                                    <a href="single-post.html" class="post-title" id='news4'
+                                        style="color: #ffff">Reunification of migrant toddlers, parents should be
+                                        completed Thursday</a>
+
                                 </div>
 
                             </div>
@@ -153,14 +174,17 @@
 
                         <div class="tab-pane fade" id="post-5" role="tabpanel" aria-labelledby="post-5-tab">
                             <!-- Single Feature Post -->
-                            <div class="single-feature-post video-post bg-img" id='news5pic' style="background-image: url(images/bg-img/news.jpg);" >
+                            <div class="single-feature-post video-post bg-img" id='news5pic'
+                                style="background-image: url(images/bg-img/news.jpg);">
 
 
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    
-                                    <a href="single-post.html" class="post-title" id='news5' style="color: #ffff">Reunification of migrant toddlers, parents should be completed Thursday</a>
-                                    
+
+                                    <a href="single-post.html" class="post-title" id='news5'
+                                        style="color: #ffff">Reunification of migrant toddlers, parents should be
+                                        completed Thursday</a>
+
                                 </div>
 
                             </div>
@@ -168,14 +192,17 @@
 
                         <div class="tab-pane fade" id="post-6" role="tabpanel" aria-labelledby="post-6-tab">
                             <!-- Single Feature Post -->
-                            <div class="single-feature-post video-post bg-img" id='news6pic' style="background-image: url(images/bg-img/news.jpg);" >
-                        
+                            <div class="single-feature-post video-post bg-img" id='news6pic'
+                                style="background-image: url(images/bg-img/news.jpg);">
+
 
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    
-                                    <a href="single-post.html" class="post-title" id='news6' style="color: #ffff">Reunification of migrant toddlers, parents should be completed Thursday</a>
-                                   
+
+                                    <a href="single-post.html" class="post-title" id='news6'
+                                        style="color: #ffff">Reunification of migrant toddlers, parents should be
+                                        completed Thursday</a>
+
                                 </div>
 
 
@@ -184,13 +211,16 @@
 
                         <div class="tab-pane fade" id="post-7" role="tabpanel" aria-labelledby="post-7-tab">
                             <!-- Single Feature Post -->
-                            <div class="single-feature-post video-post bg-img" id='news7pic' style="background-image: url(images/bg-img/news.jpg);" >
-                       
+                            <div class="single-feature-post video-post bg-img" id='news7pic'
+                                style="background-image: url(images/bg-img/news.jpg);">
+
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                    
-                                    <a href="single-post.html" class="post-title" id="news7" style="color: #ffff">Reunification of migrant toddlers, parents should be completed Thursday</a>
-                                    
+
+                                    <a href="single-post.html" class="post-title" id="news7"
+                                        style="color: #ffff">Reunification of migrant toddlers, parents should be
+                                        completed Thursday</a>
+
                                 </div>
 
                             </div>
@@ -202,105 +232,119 @@
                     <ul class="nav vizew-nav-tab" role="tablist">
 
                         <li class="nav-item">
-                            <a class="nav-link active" id="post-1-tab" data-toggle="pill" href="#post-1" role="tab" aria-controls="post-1" aria-selected="true">
+                            <a class="nav-link active" id="post-1-tab" data-toggle="pill" href="#post-1" role="tab"
+                                aria-controls="post-1" aria-selected="true">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post style-2 d-flex align-items-center">
                                     <div class="post-thumbnail">
                                         <img id='news8pic' src="images/bg-img/3.jpg" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <h6 class="post-title" id="news8" style="color: #ffff">Boys 'doing well' after Thai cave rescue</h6>
-                                        
+                                        <h6 class="post-title" id="news8" style="color: #ffff">Boys 'doing well' after
+                                            Thai cave rescue</h6>
+
                                     </div>
                                 </div>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="post-2-tab" data-toggle="pill" href="#post-2" role="tab" aria-controls="post-2" aria-selected="false">
+                            <a class="nav-link" id="post-2-tab" data-toggle="pill" href="#post-2" role="tab"
+                                aria-controls="post-2" aria-selected="false">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post style-2 d-flex align-items-center">
                                     <div class="post-thumbnail">
                                         <img id='news9pic' src="images/bg-img/4.jpg" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <h6 class="post-title" id="news9" style="color: #ffff">Meet the 12 boys rescued from cave</h6>
-                                        
+                                        <h6 class="post-title" id="news9" style="color: #ffff">Meet the 12 boys rescued
+                                            from cave</h6>
+
                                     </div>
                                 </div>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="post-3-tab" data-toggle="pill" href="#post-3" role="tab" aria-controls="post-3" aria-selected="false">
+                            <a class="nav-link" id="post-3-tab" data-toggle="pill" href="#post-3" role="tab"
+                                aria-controls="post-3" aria-selected="false">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post style-2 d-flex align-items-center">
                                     <div class="post-thumbnail">
                                         <img id='news10pic' src="images/bg-img/5.jpg" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <h6 class="post-title" id="news10" style="color: #ffff">Pogba dedicates France win to Thai cave boys</h6>
-                                        
+                                        <h6 class="post-title" id="news10" style="color: #ffff">Pogba dedicates France
+                                            win to Thai cave boys</h6>
+
                                     </div>
                                 </div>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="post-4-tab" data-toggle="pill" href="#post-4" role="tab" aria-controls="post-4" aria-selected="false">
+                            <a class="nav-link" id="post-4-tab" data-toggle="pill" href="#post-4" role="tab"
+                                aria-controls="post-4" aria-selected="false">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post style-2 d-flex align-items-center">
                                     <div class="post-thumbnail">
                                         <img id='news11pic' src="images/bg-img/6.jpg" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <h6 class="post-title" id="news11" style="color: #ffff">How the world reacted to PM's Brexit crisis</h6>
-                                        
+                                        <h6 class="post-title" id="news11" style="color: #ffff">How the world reacted to
+                                            PM's Brexit crisis</h6>
+
                                     </div>
                                 </div>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="post-5-tab" data-toggle="pill" href="#post-5" role="tab" aria-controls="post-5" aria-selected="false">
+                            <a class="nav-link" id="post-5-tab" data-toggle="pill" href="#post-5" role="tab"
+                                aria-controls="post-5" aria-selected="false">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post style-2 d-flex align-items-center">
                                     <div class="post-thumbnail">
-                                        <img id='news12pic'src="images/bg-img/4.jpg" alt="">
+                                        <img id='news12pic' src="images/bg-img/4.jpg" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <h6 class="post-title" id="news12" style="color: #ffff">Meet the 12 boys rescued from cave</h6>
-                                        
+                                        <h6 class="post-title" id="news12" style="color: #ffff">Meet the 12 boys rescued
+                                            from cave</h6>
+
                                     </div>
                                 </div>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="post-6-tab" data-toggle="pill" href="#post-6" role="tab" aria-controls="post-6" aria-selected="false">
+                            <a class="nav-link" id="post-6-tab" data-toggle="pill" href="#post-6" role="tab"
+                                aria-controls="post-6" aria-selected="false">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post style-2 d-flex align-items-center">
                                     <div class="post-thumbnail">
                                         <img id='news13pic' src="images/bg-img/6.jpg" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <h6 class="post-title" id="news13" style="color: #ffff">How the world reacted to PM's Brexit crisis</h6>
-                                       
+                                        <h6 class="post-title" id="news13" style="color: #ffff">How the world reacted to
+                                            PM's Brexit crisis</h6>
+
                                     </div>
                                 </div>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="post-7-tab" data-toggle="pill" href="#post-7" role="tab" aria-controls="post-7" aria-selected="false">
+                            <a class="nav-link" id="post-7-tab" data-toggle="pill" href="#post-7" role="tab"
+                                aria-controls="post-7" aria-selected="false">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post style-2 d-flex align-items-center">
                                     <div class="post-thumbnail">
                                         <img id='news14pic' src="images/bg-img/4.jpg" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <h6 class="post-title" id="news14" style="color: #ffff">Meet the 12 boys rescued from cave</h6>
-                                        
+                                        <h6 class="post-title" id="news14" style="color: #ffff">Meet the 12 boys rescued
+                                            from cave</h6>
+
                                     </div>
                                 </div>
                             </a>
@@ -314,7 +358,6 @@
     <!-- ##### Hero Area End ##### -->
 
     <script language="Javascript" type="text/javascript">
-
         $(async () => {
 
 
@@ -332,11 +375,12 @@
 
                 const data = await response.json();
                 var news_data = data.articles;
+                console.log(news_data);
 
                 if (response.ok) {
                     var news_list = [];
                     var news_pic = [];
-                    var news_url =[];
+                    var news_url = [];
 
                     for (const news of news_data) {
                         news_list.push(news["title"]);
@@ -347,25 +391,32 @@
                     // console.log(news_pic);
 
                     document.getElementById("news1").innerHTML = news_list[0];
-                    document.getElementById("news1pic").style.backgroundImage = "url('" + news_pic[0] + "')";
+                    document.getElementById("news1pic").style.backgroundImage = "url('" + news_pic[0] +
+                    "')";
                     document.getElementById("news1").href = news_url[0];
                     document.getElementById("news2").innerHTML = news_list[1];
-                    document.getElementById("news2pic").style.backgroundImage = "url('" + news_pic[1] + "')";
+                    document.getElementById("news2pic").style.backgroundImage = "url('" + news_pic[1] +
+                    "')";
                     document.getElementById("news2").href = news_url[1];
                     document.getElementById("news3").innerHTML = news_list[2];
-                    document.getElementById("news3pic").style.backgroundImage = "url('" + news_pic[2] + "')";
+                    document.getElementById("news3pic").style.backgroundImage = "url('" + news_pic[2] +
+                    "')";
                     document.getElementById("news3").href = news_url[2];
                     document.getElementById("news4").innerHTML = news_list[3];
-                    document.getElementById("news4pic").style.backgroundImage = "url('" + news_pic[3] + "')";
+                    document.getElementById("news4pic").style.backgroundImage = "url('" + news_pic[3] +
+                    "')";
                     document.getElementById("news4").href = news_url[3];
                     document.getElementById("news5").innerHTML = news_list[4];
-                    document.getElementById("news5pic").style.backgroundImage = "url('" + news_pic[4] + "')";
+                    document.getElementById("news5pic").style.backgroundImage = "url('" + news_pic[4] +
+                    "')";
                     document.getElementById("news5").href = news_url[4];
                     document.getElementById("news6").innerHTML = news_list[5];
-                    document.getElementById("news6pic").style.backgroundImage = "url('" + news_pic[5] + "')";
+                    document.getElementById("news6pic").style.backgroundImage = "url('" + news_pic[5] +
+                    "')";
                     document.getElementById("news6").href = news_url[5];
                     document.getElementById("news7").innerHTML = news_list[6];
-                    document.getElementById("news7pic").style.backgroundImage = "url('" + news_pic[6] + "')";
+                    document.getElementById("news7pic").style.backgroundImage = "url('" + news_pic[6] +
+                    "')";
                     document.getElementById("news7").href = news_url[6];
 
                     document.getElementById("news8").innerHTML = news_list[0];
@@ -382,13 +433,13 @@
                     document.getElementById("news13pic").src = news_pic[5];
                     document.getElementById("news14").innerHTML = news_list[6];
                     document.getElementById("news14pic").src = news_pic[6];
-                    
+
 
                 } else {
                     showError('News is not found.')
                 }
             } catch (error) {
-                alert("Help.")
+                console.log("Help.")
                 // Errors when calling the service; such as network error, 
                 // service offline, etc
                 // showError
@@ -396,7 +447,6 @@
                 //         error);
             } // error
         });
-   
     </script>
 
 
@@ -404,7 +454,7 @@
     <!-- ##### Vizew Post Area Start ##### -->
 
     <div class="section-heading">
-        <h4><br/>Categories</h4>
+        <h4><br />Categories</h4>
         <div class="line"></div>
     </div>
 
@@ -437,7 +487,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">Basics</a>
-                                            <a href="single-post.html" class="post-title">Beginner's guide to investment types</a>
+                                            <a href="single-post.html" class="post-title">Beginner's guide to investment
+                                                types</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -458,7 +509,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">Basics</a>
-                                            <a href="single-post.html" class="post-title">Here are 6 investment tips for beginners.</a>
+                                            <a href="single-post.html" class="post-title">Here are 6 investment tips for
+                                                beginners.</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -489,7 +541,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">Finance</a>
-                                            <a href="single-post.html" class="post-title">Insurance types: When to buy it, and what kind</a>
+                                            <a href="single-post.html" class="post-title">Insurance types: When to buy
+                                                it, and what kind</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -510,7 +563,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">Finance</a>
-                                            <a href="single-post.html" class="post-title">Insurance Basics Explained: A Beginners Guide</a>
+                                            <a href="single-post.html" class="post-title">Insurance Basics Explained: A
+                                                Beginners Guide</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -561,7 +615,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-primary">Smart Money</a>
-                                            <a href="single-post.html" class="post-title">5 budgeting tips for college students to set you up for financial success</a>
+                                            <a href="single-post.html" class="post-title">5 budgeting tips for college
+                                                students to set you up for financial success</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -591,7 +646,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">Savings Plan</a>
-                                            <a href="single-post.html" class="post-title">Big ticket purchases: How to plan them</a>
+                                            <a href="single-post.html" class="post-title">Big ticket purchases: How to
+                                                plan them</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -612,7 +668,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">Credit Cards</a>
-                                            <a href="single-post.html" class="post-title">Charge Card vs Credit Card: What's the difference?</a>
+                                            <a href="single-post.html" class="post-title">Charge Card vs Credit Card:
+                                                What's the difference?</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -645,7 +702,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">CPF</a>
-                                            <a href="single-post.html" class="post-title">Beginner's guide to CPF retirement plans</a>
+                                            <a href="single-post.html" class="post-title">Beginner's guide to CPF
+                                                retirement plans</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -666,7 +724,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-success">Income tax</a>
-                                            <a href="single-post.html" class="post-title">Income tax notice? Fear not, know how to reply</a>
+                                            <a href="single-post.html" class="post-title">Income tax notice? Fear not,
+                                                know how to reply</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -717,7 +776,8 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="post-cata cata-sm cata-primary">Expenses</a>
-                                            <a href="single-post.html" class="post-title">5 types of expenses you should never charge on a card</a>
+                                            <a href="single-post.html" class="post-title">5 types of expenses you should
+                                                never charge on a card</a>
                                             <div class="post-meta d-flex">
                                                 <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
                                                 <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
@@ -755,7 +815,9 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" style="color: #ffff">Colorlib</a>
+                        </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
+                            style="color: #ffff">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>

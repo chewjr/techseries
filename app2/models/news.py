@@ -12,7 +12,7 @@ def search_news():
     newsapi = NewsApiClient(api_key="ec8c9d047f474773ba7a8157570e4830")
     # define query -> q
 
-    topheadlines = newsapi.get_everything(sources="bbc-news,bloomberg,business-insider,fortune,the-verge", sort_by='relevancy')
+    topheadlines = newsapi.get_everything(q="finance", sources="bbc-news,bloomberg,business-insider,fortune,the-verge", sort_by='relevancy')
     #dump(topheadlines)
     return jsonify(topheadlines)
  
