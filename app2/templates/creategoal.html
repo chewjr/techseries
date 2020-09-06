@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Au Register Forms by Colorlib</title>
+
+    <!-- Icons font CSS-->
+    <!-- <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"> -->
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all"> -->
+
+    <!-- Main CSS-->
+    <link href="css/registration.css" rel="stylesheet" media="all">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="page-wrapper bg-solidos p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Create Goal</h2>
+                    <form method="POST">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <label class="label">User ID</label>
+                                <input class="input--style-4" type="text" width=100 id="userid" required>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Category</label>
+                                <select id="cat" name="cat">
+                                    <option value="Travel">Travel</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Emergency Fund">Emergency Fund</option>
+                                    <option value="Family">Family</option>
+                                    <option value="Wedding">Wedding</option>
+                                    <option value="Housing">Housing</option>
+                                    <option value="Retirement">Retirement</option>
+                                    <option value= "Others">Others</option>
+                                    </select>
+                            </div>
+                        </div>
+
+                        <div class="col-5">
+                            <div class="input-group">
+                                <label class="label">Target Amount</label>
+                                <input class="input--style-4" type="text" name="target_amount" id="target_amount" required>
+                            </div>
+                        </div>
+
+                        <div class="col-5">
+                            <!-- <div class="input-group"> -->
+                            <label class="label">Target Deadline</label>
+                            <!-- </div> -->
+                            <input type="date" id="targeted_deadline" name="targeted_deadline" required>
+                        </div>
+
+                        <div class="p-t-15 ">
+                            <button class="btn btn--radius-2 btn--blue" type="submit" id="submit">Submit</button>
+                        </div>
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        $('#submit').click(
+            // call authenticate function to authenticate user when logging in
+            async() => {
+                var id = $('#userid').val();
+                var category = $('#cat').val();
+                var amount = $('#target_amount').val();
+                var deadline = $('#targeted_deadline').val();
+                console.log(id, category, amount, deadline);
+
+                var serviceURL = "http://127.0.0.1:5003/addgoal";
+                try {
+                    const response =
+                        await fetch(
+                            serviceURL, {
+                                method: 'POST',
+                                headers: {
+                                    "Content-Type": "application/json "
+                                },
+                                body: JSON.stringify({
+                                    "id": id,
+                                    "category": category,
+                                    "amount": amount,
+                                    "deadline": deadline
+                                })
+                            }
+                        );
+                    const data = await response.json();
+                    if (response.ok) {
+                        if (data.status == 'success') {
+                            // store userid in session 
+                            // sessionStorage.setItem("id ", id);
+                            // after all runs, head to index.html
+                            window.location.href = 'homepage.html';
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                } catch (error) {
+                    // showError('Unable to authenticate user');
+                    console.log(error);
+                    alert('Error authenticating, please try again');
+                }
+            }
+        )
+    </script>
+
+
+    <!-- Jquery JS-->
+    <script src="vendor-registration/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor-registration/select2/select2.min.js"></script>
+    <script src="vendor-registration/datepicker/moment.min.js"></script>
+    <script src="vendor-registration/datepicker/daterangepicker.js"></script>
+
+    <!-- bootstrap  -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous ">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN " crossorigin="anonymous ">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV " crossorigin="anonymous ">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+
+    <!-- Main JS-->
+    <!-- <script src="js/registration.js "></script> -->
+
+
+
+</body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
