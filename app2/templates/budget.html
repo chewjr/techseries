@@ -82,13 +82,29 @@
 
     <!-- spending per month -->
     <div class="container mx-auto">
-        <div class="header">Month</div>
+        <div class="header">
+            <script>
+                var monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                    ];
+                var d = new Date();
+                document.write(monthNames[d.getMonth()] + " " + d.getFullYear());
+            </script>
+        </div>
         <div class="row exp-spend">
+            <div class="col-12">
+                <div class="row d-flex justify-content-center money-header">
+                    This month's Budget:
+                </div>
+                <div class="row d-flex justify-content-center money-value" style="border-bottom: solid 1px black;" id="budget"></div>
+            </div>
             <div class="col-6">
-                <div class="row d-flex justify-content-center" style="border-right: solid 1px black;">Expenditure:
+                <div class="row d-flex justify-content-center" style="border-right: solid 1px black;">
+                    Expenditure:
                 </div>
                 <div class="row d-flex justify-content-center money-value" style="border-right: solid 1px black;">
-                    $1234.56</div>
+                    $1234.56
+                </div>
             </div>
 
             <div class="col-6">
@@ -209,6 +225,45 @@
             }
         });
     </script>
+    <script>
+    async function myfetch() {
+        try {
+            var id = sessionStorage["id"];
+            if (typeof id == "undefined") {
+                window.location.href = 'login.html';
+                return;
+            }
+            var serviceURL = "http://127.0.0.1:5004/budget/month/" + id;
+            let response = 
+                await fetch(
+                    serviceURL, {
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                        }
+                    }
+                );
+                const data = await response.json();
+                console.log(data);
+                if (response.ok) {
+                    if (data.status == 'success') {
+                        // store userid in session 
+                        // sessionStorage.setItem("id", id);
+                        // after all runs, head to index.html
+                        document.getElementById("budget").innerText = "$" + data.budget.amount;
+                    } else {
+                        document.getElementById("budget").innerText = 0;
+                    }
+                }
+        } catch (error) {
+            // showError('Unable to authenticate user');
+            // console.log(error);
+            // alert('Error authenticating, please try again');
+            alert(error);
+        }
+    }
+    myfetch();
+</script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

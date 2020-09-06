@@ -30,12 +30,11 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `budget`;
 CREATE TABLE IF NOT EXISTS `budget` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL,
-  `category` varchar(30) NOT NULL,
-  `name` varchar(30) NOT NULL,
   `amount` float NOT NULL,
-  PRIMARY KEY (`user_id`,`created_at`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

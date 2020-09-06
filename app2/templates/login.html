@@ -125,9 +125,9 @@
                     if (response.ok) {
                         if (data.status == 'success') {
                             // store userid in session 
-							// sessionStorage.setItem("id", id);
+							sessionStorage.setItem("id", id);
                             // after all runs, head to index.html
-                            window.location.href = 'homepage.html';
+                            window.location.href = 'dashboard.html';
                         } else {
                             alert('Invalid username/password, please try again');
                         }
