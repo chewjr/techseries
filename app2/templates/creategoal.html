@@ -10,7 +10,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>Create Your First Goal</title>
 
     <!-- Icons font CSS-->
     <!-- <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -62,7 +62,7 @@
                         <div class="col-5">
                             <div class="input-group">
                                 <label class="label">Target Amount</label>
-                                <input class="input--style-4" type="text" name="target_amount" id="target_amount" required>
+                                <input class="input--style-4" type="number" name="target_amount" id="target_amount" required>
                             </div>
                         </div>
 
@@ -92,7 +92,7 @@
                 var amount = $('#target_amount').val();
                 var deadline = $('#targeted_deadline').val();
                 console.log(id, category, amount, deadline);
-
+                console.log(parseFloat(amount));
                 var serviceURL = "http://127.0.0.1:5003/add_goal";
                 try {
                     const response =
@@ -105,12 +105,12 @@
                                 body: JSON.stringify({
                                     "id": id,
                                     "category": category,
-                                    "amount": parseFloat(amount),
+                                    "amount": parseInt(amount),
                                     "deadline": deadline
                                 })
                             }
-                            );
-                            console.log("hi");
+                        );
+                        console.log("hi");
 
 
                     const data = await response.json();
@@ -128,6 +128,7 @@
                     }
                 } catch (error) {
                     // showError('Unable to authenticate user');
+                    alert(error);
                     console.log("hello");
                     alert('Error authenticating, please try again');
                 }

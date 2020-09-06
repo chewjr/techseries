@@ -45,13 +45,13 @@
             color:rgb(218, 218, 218) !important;
         }
     </style>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
 <body class="nav-md" style="background-color:wrgb(247, 247, 247);font-size: medium; font-weight: 200;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-family: 'Lato', sans-serif;">
-        <a class="navbar-brand" href="#"><img src="images/logo.png" width=100px></a>
+        <a class="navbar-brand" href="dashboard.html"><img src="images/logo.png" width=100px></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,7 +60,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto navbar-center">
                 <li class="nav-item active" style="padding: 0px 20px 0px 20px; ">
-                    <a class="nav-link" href="#" style="color:white !important;">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="dashboard.html" style="color:white !important;">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
@@ -68,7 +68,7 @@
                 </li>
 
                 <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
-                    <a class="nav-link" href="#">Goal Based Profile</a>
+                    <a class="nav-link" href="userprofile.html">Goal Based Profile</a>
                 </li>
 
                 <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
@@ -77,10 +77,19 @@
 
             </ul>
 
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-user"></i> View
-                    Profile</button>
-            </form>
+            <!-- <form class="form-inline my-2 my-lg-0"> -->
+               
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout"><i class="fa fa-user"></i> Logout</button>
+                    <script>
+                        $('#logout').click(function () {
+                            sessionStorage.clear();
+                            window.location = 'login.html'; // or any other page after logging out.
+
+                        });
+                  
+                    </script>
+                
+            <!-- </form> -->
         </div>
     </nav>
 
