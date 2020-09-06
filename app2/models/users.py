@@ -17,7 +17,7 @@ class User(db.Model):
 
     id = db.Column(db.String, primary_key=True)
     password = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, nullable=False)
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable=False)
     occupation = db.Column(db.String, nullable=False)

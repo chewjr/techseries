@@ -14,13 +14,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-CORS(app)
+CORS(app, resources={r"/foo": {"origins": "*"}})
 
 class Expenses(db.Model):
     __tablename__ = 'expenses'
 
     user_id = db.Column(db.String, primary_key=True, nullable=False)
-    created_at = db.Column(db.DateTime, primary_key=True, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, primary_key=True, nullable=False)
     category = db.Column(db.String, nullable = False)
     name = db.Column(db.String, nullable = False)
     amount = db.Column(db.Float(precision=2), nullable = False)

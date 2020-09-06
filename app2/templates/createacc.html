@@ -10,8 +10,8 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-	<title>Au Register Forms by Colorlib</title>
-	
+    <title>Au Register Forms by Colorlib</title>
+
     <!-- Icons font CSS-->
     <!-- <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"> -->
@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <h2 class="title">Registration Form</h2>
                     <form method="POST">
-						<div class="row row-space">
+                        <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">User ID</label>
@@ -48,8 +48,8 @@
                                     <input class="input--style-4" type="password" name="password" id="password" required>
                                 </div>
                             </div>
-						</div>
-						
+                        </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -72,9 +72,9 @@
                                         <input class="input--style-4" type="text" name="occupation" id="occupation" required>
                                     </div>
                                 </div>
-							</div>
-							
-							<div class="col-2">
+                            </div>
+
+                            <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Age</label>
                                     <div class="input-group-icon">
@@ -90,7 +90,7 @@
                                     <input class="input--style-4" type="email" name="email" id="email" required>
                                 </div>
                             </div>
-							<div class="col-2">
+                            <div class="col-2">
                                 <div class="input-group">
                                     <label class="label" for="slider">Your Risk Level</label>
                                     <input type="range" class="custom-range" min="0" max="100" step="10" id="risk">
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" type="submit" id="submit">Submit</button>
                         </div>
@@ -114,7 +114,7 @@
     </div>
 
     <script>
-        $('#submit').click( 
+        $('#submit').click(
             // call authenticate function to authenticate user when logging in
             async() => {
                 var id = $('#userid').val();
@@ -147,21 +147,21 @@
                                 })
                             }
                         );
-					const data = await response.json();
+                    const data = await response.json();
                     if (response.ok) {
                         if (data.status == 'success') {
                             // store userid in session 
-							// sessionStorage.setItem("id", id);
+                            // sessionStorage.setItem("id", id);
                             // after all runs, head to index.html
-                            window.location.href = 'homepage.html';
+                            window.location.href = 'profiling.html';
                         } else {
                             alert(data.message);
                         }
                     }
                 } catch (error) {
-					// showError('Unable to authenticate user');
-					console.log(error);
-					alert('Error authenticating, please try again');
+                    // showError('Unable to authenticate user');
+                    console.log(error);
+                    alert('Error authenticating, please try again');
                 }
             }
         )
@@ -173,27 +173,25 @@
     <!-- Vendor JS-->
     <script src="vendor-registration/select2/select2.min.js"></script>
     <script src="vendor-registration/datepicker/moment.min.js"></script>
-	<script src="vendor-registration/datepicker/daterangepicker.js"></script>
-	
-	<!-- bootstrap  -->
-	    <!-- Optional JavaScript -->
+    <script src="vendor-registration/datepicker/daterangepicker.js"></script>
+
+    <!-- bootstrap  -->
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
 
     <!-- Main JS-->
-	<script src="js/registration.js"></script>
-	
+    <script src="js/registration.js"></script>
 
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
 <!-- end document-->
