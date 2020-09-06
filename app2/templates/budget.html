@@ -32,8 +32,7 @@
 
     <!-- chart for budget expenses -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -81,16 +80,35 @@
     </nav>
 
     <!-- spending per month -->
-    <div class="container mx-auto">
+    <div class="container header">
         <div class="header">
-            <script>
-                var monthNames = ["January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                    ];
-                var d = new Date();
-                document.write(monthNames[d.getMonth()] + " " + d.getFullYear());
-            </script>
+            <div class="header-month">
+                <script>
+                    var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"
+                        ];
+                    var d = new Date();
+                    document.write(monthNames[d.getMonth()] + " " + d.getFullYear());
+                </script>
+            </div>
+            <div class="edit-budget text-right">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="edit-budget-btn">Edit budget</button>
+                <!-- The Modal -->
+                <div id="edit-budget" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p class="budget-indicate">Indicate your total budget for this month:</p>
+                        <input class="form-control budget-amount" type="text" id="budget-amount">
+                        <div class="text-right">
+                            <button class="btn btn-outline-success confirm-budget w-25" id="confirm-budget">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="container mx-auto">
         <div class="row exp-spend">
             <div class="col-12">
                 <div class="row d-flex justify-content-center money-header">
@@ -155,6 +173,7 @@
         </table>
     </div>
 
+    <!-- chart -->
     <script>
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
@@ -225,45 +244,123 @@
             }
         });
     </script>
+
+    <!-- retrieve budget value -->
     <script>
-    async function myfetch() {
-        try {
-            var id = sessionStorage["id"];
-            if (typeof id == "undefined") {
-                window.location.href = 'login.html';
-                return;
+        async function myfetch() {
+            try {
+                var id = sessionStorage["id"];
+                if (typeof id == "undefined") {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                var serviceURL = "http://127.0.0.1:5004/budget/month/" + id;
+                let response = 
+                    await fetch(
+                        serviceURL, {
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                            }
+                        }
+                    );
+                    const data = await response.json();
+                    console.log(data);
+                    if (response.ok) {
+                        if (data.status == 'success') {
+                            // store userid in session 
+                            // sessionStorage.setItem("id", id);
+                            // after all runs, head to index.html
+                            sessionStorage.setItem("budget_id", data.budget.id);
+                            document.getElementById("budget").innerText = "$" + data.budget.amount;
+                        } 
+                    } else {
+                        document.getElementById("budget").innerText = "$0.00";
+                    }
+            } catch (error) {
+                // showError('Unable to authenticate user');
+                // console.log(error);
+                // alert('Error authenticating, please try again');
+                alert(error);
             }
-            var serviceURL = "http://127.0.0.1:5004/budget/month/" + id;
-            let response = 
-                await fetch(
-                    serviceURL, {
-                        method: 'GET',
-                        headers: {
-                            "Content-Type": "application/json",
+        }
+        myfetch();
+    </script>
+
+    <!-- modal to edit budget  -->
+    <script>
+        // Get the modal
+        var modal = document.getElementById("edit-budget");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("edit-budget-btn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <!-- edit budget amount -->
+    <script>
+        var budget_id = sessionStorage["budget_id"];
+        $('#confirm-budget').click(
+            // call authenticate function to authenticate user when logging in
+            async() => {
+                var amount = $('#budget-amount').val();
+                console.log(amount);
+                var serviceURL = "http://127.0.0.1:5004/budget/month/" + sessionStorage["id"];
+				var rmbme = $('#ckb1').val();
+                try {
+                    const response =
+                        await fetch(
+                            serviceURL, {
+                                method: 'GET',
+                                headers: {
+									"Content-Type": "application/json",
+									
+                                }
+                            }
+                        );
+					const data = await response.json();
+					console.log(data);
+                    if (response.ok) {
+                        if (data.status == 'success') {
+                            // store userid in session 
+							// sessionStorage.setItem("id", id);
+                            // after all runs, head to index.html
+                            // window.location.href = 'dashboard.html';
+                            async() => {
+                                ### here ! @youxuan 
+                            }
+                        } else {
+                            alert('Invalid username/password, please try again');
                         }
                     }
-                );
-                const data = await response.json();
-                console.log(data);
-                if (response.ok) {
-                    if (data.status == 'success') {
-                        // store userid in session 
-                        // sessionStorage.setItem("id", id);
-                        // after all runs, head to index.html
-                        document.getElementById("budget").innerText = "$" + data.budget.amount;
-                    } else {
-                        document.getElementById("budget").innerText = 0;
-                    }
+                } catch (error) {
+					// showError('Unable to authenticate user');
+					// console.log(error);
+					// alert('Error authenticating, please try again');
+					alert(error);
                 }
-        } catch (error) {
-            // showError('Unable to authenticate user');
-            // console.log(error);
-            // alert('Error authenticating, please try again');
-            alert(error);
-        }
-    }
-    myfetch();
-</script>
+            }
+        )
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
