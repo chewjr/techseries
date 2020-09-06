@@ -5,7 +5,6 @@ from flask_cors import CORS
 from os import environ
 from datetime import datetime
 
-import datetime
 import urllib, json, requests
 
 app = Flask(__name__)
@@ -71,41 +70,27 @@ def add_goal_into_goal_db():
         try:
             max_id = db.session.query(db.func.max(Goal.goal_id)).scalar()
             goal_id = max_id + 1
+            
         except:
             goal_id = 1
 
         user_id = go["id"]
-        created_at = datetime.now()
+        created_at = datetime.now() 
         category = go['category']
         amount = go['amount']
         deadline = go['deadline']
 
-        # budget_exist = Budget.query.filter_by(user_id = user_id, created_at = created_at ).first()
+        
 
-        # if budget_exist:
-        #     budget_exist_json = budget_exist.json()
-        #     budget_exist_json = dict(budget_exist_json)
-        #     # Budget_numshare = budget_exist_json['numshare'] 
-        #     # budget_exist.numshare = int(Budget_numshare) + int(qty)
-        #     Budget_totalprice = budget_exist_json['totalprice']
-        #     budget_exist.totalprice = float(Budget_totalprice) + float(totalprice)
-        #     budget_exist.Budgetprice = (float(Budget_totalprice) + float(totalprice)) / (budget_exist_json['numshare'] + int(qty))
-            
-            
-        #     db.session.commit()
-        #     # new entry
-        #     return jsonify({"budget": [budget.json() for budget in Budget.query.filter_by(user_id = user_id, created_at = created_at)]}), 200
-
-        # else:
         new_go = Goal(user_id, goal_id, created_at, category, amount, deadline)
         db.session.add(new_go)
         db.session.commit()
-        # new entry
-        #might need to change this to a string
-        return jsonify({"message":"Success"}), 200
+
+        return jsonify({"status": "success"}), 201
+        
 
     except:
-        return jsonify({"message":"An error occurred creating this entry in the goal database."}) , 500
+        return jsonify({"status":"An error occurred creating this entry in the goal database."}) , 500
 
 
 

@@ -153,14 +153,13 @@
                             // store userid in session 
                             // sessionStorage.setItem("id", id);
                             // after all runs, head to index.html
-                            window.location.href = 'profiling.html';
+                            window.location = 'profiling.html';
                         } else {
                             alert(data.message);
                         }
                     }
                 } catch (error) {
                     // showError('Unable to authenticate user');
-                    console.log(error);
                     alert('Error authenticating, please try again');
                 }
             }
@@ -186,7 +185,7 @@
     </script>
 
     <!-- Main JS-->
-    <script src="js/registration.js"></script>
+    <!-- <script src="js/registration.js"></script> -->
 
 
 

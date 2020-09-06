@@ -91,7 +91,6 @@
     <script>
         // Helper function to display error message
         function showError(message) {
-
             // Display an error under the main container
             $('#error')
                 .append("<label>" + message + "</label>");
@@ -104,15 +103,15 @@
                 var id = $('#id').val();
                 var password = $('#password').val();
                 var serviceURL = "http://127.0.0.1:5000/authenticate";
-				var rmbme = $('#ckb1').val();
+                var rmbme = $('#ckb1').val();
                 try {
                     const response =
                         await fetch(
                             serviceURL, {
                                 method: 'POST',
                                 headers: {
-									"Content-Type": "application/json",
-									
+                                    "Content-Type": "application/json",
+
                                 },
                                 body: JSON.stringify({
                                     "id": id,
@@ -120,12 +119,12 @@
                                 })
                             }
                         );
-					const data = await response.json();
-					console.log(data);
+                    const data = await response.json();
+                    console.log(data);
                     if (response.ok) {
                         if (data.status == 'success') {
                             // store userid in session 
-							sessionStorage.setItem("id", id);
+                            sessionStorage.setItem("id", id);
                             // after all runs, head to index.html
                             window.location.href = 'dashboard.html';
                         } else {
@@ -133,10 +132,10 @@
                         }
                     }
                 } catch (error) {
-					// showError('Unable to authenticate user');
-					// console.log(error);
-					// alert('Error authenticating, please try again');
-					alert(error);
+                    // showError('Unable to authenticate user');
+                    // console.log(error);
+                    // alert('Error authenticating, please try again');
+                    alert(error);
                 }
             }
         )
