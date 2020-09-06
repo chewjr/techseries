@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from os import environ
+from datetime import datetime
 
 import datetime
 import urllib, json, requests
@@ -14,14 +15,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-CORS(app)
+CORS(app, resources={r"/foo": {"origins": "*"}})
 
 class Goal(db.Model):
     __tablename__ = 'goal'
 
     user_id = db.Column(db.String, primary_key=True, nullable=False)
     goal_id = db.Column(db.String, primary_key=True, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, nullable=False)
     category = db.Column(db.String, nullable = False)
     amount = db.Column(db.Float(precision=2), nullable = False)
     deadline = db.Column(db.DateTime, nullable=False)
@@ -30,7 +31,7 @@ class Goal(db.Model):
         self.user_id = user_id
         self.goal_id = goal_id
         self.created_at = created_at
-        self.category = category #hardcode
+        self.category = category 
         self.amount = amount
         self.deadline = deadline
 
@@ -50,7 +51,7 @@ def get_all_by_user_id(user_id):
         for goal in Goal.query.filter_by(user_id = user_id):
             res = {}
             res['goal_id'] = goal.goal_id
-            res['created_at'] = goal.created_at #hardcode?
+            res['created_at'] = goal.created_at
             res['category'] = goal.category
             res['amount'] = goal.amount
             res['deadline'] = goal.deadline
@@ -67,10 +68,14 @@ def add_goal_into_goal_db():
     try: 
 
         go = request.get_json()
+        try:
+            max_id = db.session.query(db.func.max(Goal.goal_id)).scalar()
+            goal_id = max_id + 1
+        except:
+            goal_id = 1
 
-        user_id = go["user_id"]
-        goal_id =go["goal_id"]
-        created_at = go["created_at"]
+        user_id = go["id"]
+        created_at = datetime.now()
         category = go['category']
         amount = go['amount']
         deadline = go['deadline']

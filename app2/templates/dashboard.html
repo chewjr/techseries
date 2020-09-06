@@ -11,6 +11,10 @@
 
     <title>Gentelella Alela! | </title>
 
+    <!-- for font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
     <!-- Bootstrap -->
     <link href="vendors-dashboard/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -29,11 +33,23 @@
 
     <!-- Custom Theme Style -->
     <link href="css/css-dashboard/custom.min.css" rel="stylesheet">
+
+    <style>
+        .navbar-brand, .navbar-nav>li>a {
+            color: rgb(160, 158, 158) !important;
+        }
+
+        .navbar-brand:hover, .navbar-nav>li>a:hover {
+            color: rgb(218, 218, 218) !important;
+        }
+    </style>
+
+
 </head>
 
-<body class="nav-md" style="background-color: rgb(247, 247, 247);">
+<body class="nav-md" style="background-color: rgb(247, 247, 247);font-size: medium; font-weight: 200;">
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-family: 'Lato', sans-serif;">
         <a class="navbar-brand" href="#"><img src="images/logo.png" width=100px></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,28 +58,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto navbar-center">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item active" style="padding: 0px 20px 0px 20px; ">
+                    <a class="nav-link" href="#" style="color: white !important;">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Budget Tracker
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Budget</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Expenses</a>
-                    </div>
+                <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
+                    <a class="nav-link" href="./budget.html">Budget Tracker</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
                     <a class="nav-link" href="#">Goal Based Profile</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Education</a>
+                <li class="nav-item" style="padding: 0px 20px 0px 20px; ">
+                    <a class="nav-link" href="./education.html">Education</a>
                 </li>
 
             </ul>
@@ -177,9 +185,10 @@
     <!-- /page content -->
 
     <!-- footer content -->
-    <footer  style="background-color: rgb(247, 247, 247);">
-        <div class="pull-right"  style="color: rgb(247, 247, 247);"> 
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com"  style="color: rgb(247, 247, 247);">Colorlib</a>
+    <footer style="background-color: rgb(247, 247, 247);">
+        <div class="pull-right" style="color: rgb(247, 247, 247);">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com"
+                style="color: rgb(247, 247, 247);">Colorlib</a>
         </div>
         <div class="clearfix"></div>
     </footer>
