@@ -32,8 +32,7 @@
 
     <!-- chart for budget expenses -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -53,7 +52,7 @@
 
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Budget Tracker<span class="sr-only">(current)</span></a>
-                </li>    
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">Goal Based Profile</a>
@@ -73,22 +72,43 @@
     </nav>
 
     <!-- spending per month -->
-    <div class="container mx-auto">
+    <div class="container header">
         <div class="header">
-            <script>
-                var monthNames = ["January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
+            <div class="header-month">
+                <script>
+                    var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"
                     ];
-                var d = new Date();
-                document.write(monthNames[d.getMonth()] + " " + d.getFullYear());
-            </script>
+                    var d = new Date();
+                    document.write(monthNames[d.getMonth()] + " " + d.getFullYear());
+                </script>
+            </div>
+            <div class="edit-budget text-right">
+                <button class="btn btn-outline-success my-2 my-sm-0 modal-btn" type="button" id="edit-budget-btn">Edit budget</button>
+                <!-- The Modal -->
+                <div id="edit-budget" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close" id="budget-close">&times;</span>
+                        <p class="budget-indicate">Indicate your total budget for this month:</p>
+                        <input class="form-control budget-amount" type="text" id="budget-amount">
+                        <div class="text-right">
+                            <button class="btn btn-outline-success confirm-budget w-25"
+                                id="confirm-budget">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="container mx-auto">
         <div class="row exp-spend">
             <div class="col-12">
                 <div class="row d-flex justify-content-center money-header">
                     This month's Budget:
                 </div>
-                <div class="row d-flex justify-content-center money-value" style="border-bottom: solid 1px black;" id="budget"></div>
+                <div class="row d-flex justify-content-center money-value" style="border-bottom: solid 1px black;"
+                    id="budget"></div>
             </div>
             <div class="col-6">
                 <div class="row d-flex justify-content-center" style="border-right: solid 1px black;">
@@ -111,18 +131,42 @@
     </div>
 
 
-    <!-- details table -->
     <div class="container">
-        <table class="table">
+        <!-- add expenses -->
+        <div class="text-right">
+            <button class="btn btn-outline-success w-25 modal-btn" style="margin-bottom: 10px;" id="add-expense-btn">Add Expense</button>
+            <!-- The Modal -->
+            <div id="add-expense" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close" id="expense-close">&times;</span>
+                    <p class="budget-indicate">Name:</p>
+                    <input class="form-control budget-amount" type="text" id="expense-name">
+                    <br>
+                    <p class="budget-indicate">Price:</p>
+                    <input class="form-control budget-amount" type="text" id="expense-amount">
+                    <br>
+                    <p class="budget-indicate">Category:</p>
+                    <input class="form-control budget-amount" type="text" id="expense-category">
+                    <div class="text-right">
+                        <button class="btn btn-outline-success confirm-budget w-25" id="confirm-expense">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- details table -->
+        <table class="table" id="expenses">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Created At</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
                 <tr>
                     <td>Chicken Rice</td>
                     <td class="money-table">$5.65</td>
@@ -143,10 +187,12 @@
                     <td><a href=""><i class="far fa-edit"></i></a></td>
                     <td><a href=""><i class="far fa-trash-alt"></i></a></td>
                 </tr>
-            </tbody>
+            </tbody> -->
         </table>
+
     </div>
 
+    <!-- chart -->
     <script>
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
@@ -198,7 +244,7 @@
                         stacked: true,
                         gridLines: {
                             color: "rgba(0, 0, 0, 0)",
-                        }, 
+                        },
                     }],
                     yAxes: [{
                         stacked: true,
@@ -217,24 +263,26 @@
             }
         });
     </script>
+
+    <!-- retrieve budget value -->
     <script>
-    async function myfetch() {
-        try {
-            var id = sessionStorage["id"];
-            if (typeof id == "undefined") {
-                window.location.href = 'login.html';
-                return;
-            }
-            var serviceURL = "http://127.0.0.1:5004/budget/month/" + id;
-            let response = 
-                await fetch(
-                    serviceURL, {
-                        method: 'GET',
-                        headers: {
-                            "Content-Type": "application/json",
+        async function myfetch() {
+            try {
+                var id = sessionStorage["id"];
+                if (typeof id == "undefined") {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                var serviceURL = "http://127.0.0.1:5004/budget/month/" + id;
+                let response =
+                    await fetch(
+                        serviceURL, {
+                            method: 'GET',
+                            headers: {
+                                "Content-Type": "application/json",
+                            }
                         }
-                    }
-                );
+                    );
                 const data = await response.json();
                 console.log(data);
                 if (response.ok) {
@@ -242,20 +290,223 @@
                         // store userid in session 
                         // sessionStorage.setItem("id", id);
                         // after all runs, head to index.html
+                        sessionStorage.setItem("budget_id", data.budget.id);
                         document.getElementById("budget").innerText = "$" + data.budget.amount;
-                    } 
+                    }
                 } else {
-                    document.getElementById("budget").innerText = 0;
+                    document.getElementById("budget").innerText = "$0.00";
                 }
-        } catch (error) {
-            // showError('Unable to authenticate user');
-            // console.log(error);
-            // alert('Error authenticating, please try again');
-            alert(error);
+            } catch (error) {
+                // showError('Unable to authenticate user');
+                // console.log(error);
+                // alert('Error authenticating, please try again');
+                alert(error);
+            }
         }
-    }
-    myfetch();
-</script>
+        myfetch();
+    </script>
+
+    <!-- modal to edit budget  -->
+    <script>
+        // Get the modal
+        var modal = document.getElementsByClassName("modal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementsByClassName("modal-btn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close");
+
+        // When the user clicks on the button, open the modal
+        btn[0].onclick = function() {
+            modal[0].style.display = "block";
+        }
+
+        btn[1].onclick = function() {
+            modal[1].style.display = "block";
+        }
+        // When the user clicks on <span> (x), close the modal
+        console.log(span[0]);
+        span[0].onclick = function() {
+            modal[0].style.display = "none";
+        }
+
+        span[1].onclick = function() {
+            modal[1].style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal[0]) {
+                modal[0].style.display = "none";
+            }
+        }
+    </script>
+
+    <!-- edit budget amount -->
+    <script>
+        var budget_id = sessionStorage["budget_id"];
+        $('#confirm-budget').click(
+            // call authenticate function to authenticate user when logging in
+            async () => {
+                var amount = $('#budget-amount').val();
+
+                var serviceURL = "http://127.0.0.1:5004/budget/month/" + sessionStorage["id"];
+                var rmbme = $('#ckb1').val();
+                try {
+                    const response =
+                        await fetch(
+                            serviceURL, {
+                                method: 'GET',
+                                headers: {
+                                    "Content-Type": "application/json",
+
+                                }
+                            }
+                        );
+                    const data = await response.json();
+                    console.log(data);
+                    if (response.ok) {
+                        if (data.status == 'success') {
+
+                            // store userid in session 
+                            // sessionStorage.setItem("id", id);
+                            // after all runs, head to index.html
+                            // window.location.href = 'dashboard.html';
+                            async () => {
+                                var serviceURL = "http://127.0.0.1:5004/edit_budget";
+                                try {
+                                    const response =
+                                        await fetch(
+                                            serviceURL, {
+                                                method: 'POST',
+                                                headers: {
+                                                    "Content-Type": "application/json",
+                                                },
+                                                body: JSON.stringify({
+                                                    "user_id": sessionStorage["id"],
+                                                    "amount": amount
+                                                })
+                                            }
+                                        );
+                                    const data = await response.json();
+                                    if (response.ok) {
+                                        if (data.status == 'success') {
+                                            // store userid in session 
+                                            // sessionStorage.setItem("id", id);
+                                            // after all runs, head to index.html
+                                            window.location.href = 'budget.html';
+                                        }
+                                    }
+                                } catch (error) {
+                                    // showError('Unable to authenticate user');
+                                    console.log(error);
+                                    alert('Error adding budget, please try again');
+                                }
+                            }
+                        } else {
+                            alert('Invalid username/password, please try again');
+                        }
+                    } else {
+                        async () => {
+                            console.log(amount);
+                            console.log(sessionStorage["id"]);
+                            var serviceURL =
+                                "http://127.0.0.1:5004/add_budget";
+                            try {
+                                const response =
+                                    await fetch(
+                                        serviceURL, {
+                                            method: 'POST',
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify({
+                                                "user_id": sessionStorage["id"],
+                                                "amount": amount
+                                            })
+                                        }
+                                    );
+                                const data = await response.json();
+                                if (response.ok) {
+                                    if (data.status == 'success') {
+                                        // store userid in session 
+                                        // sessionStorage.setItem("id", id);
+                                        // after all runs, head to index.html
+                                        window.location.href = 'budget.html';
+                                    } else {
+                                        alert(data.message);
+                                    }
+                                }
+                            } catch (error) {
+                                // showError('Unable to authenticate user');
+                                console.log(error);
+                                alert('Error adding budget, please try again');
+                            }
+                        }
+                        // alert('Invalid id, please try again');
+                    }
+                } catch (error) {
+                    // showError('Unable to authenticate user');
+                    // console.log(error);
+                    // alert('Error authenticating, please try again');
+                    alert(error);
+                }
+            }
+        )
+    </script>
+
+    <!-- get expenses -->
+    <script>
+        // Helper function to display error message
+        function showError(message) {
+            // Display an error under the main container
+            $('#error')
+                .append("<label>" + message + "</label>");
+        }
+        $(async () => {
+            $('#expenses tbody').empty();
+            $('#error').empty();
+            var serviceURL = "http://127.0.0.1:5002/expenses/" + sessionStorage["id"];
+            console.log(serviceURL);
+            try {
+                const response =
+                    await fetch(
+                        serviceURL, {
+                            method: 'GET'
+                        }
+                    );
+
+
+                const expenses = await response.json();
+
+                if (response.ok) {
+                    var row = "<tbody>";
+                    for (exp of expenses["expenses"]) {
+                        row += "<tr><td>" + exp["name"] + "</td>" +
+                            "<td>" + exp["amount"] + "</td>" +
+                            "<td>" + exp["category"] + "</td>" + 
+                            "<td>" + exp["created_at"] + "</td>" +
+                            "<td>" + '<a href=""><i class="far fa-edit"></i></a>' + "</td>" + 
+                            "<td>" + '<a href=""><i class="far fa-trash-alt"></i></a>' + "</td></tr>"
+                    }
+                    row += "</tbody>";
+                    $('#expenses').append(row);
+                } else {
+                    showError('Expense is not found.')
+                }
+            } catch (error) {
+                // Errors when calling the service; such as network error, 
+                // service offline, etc
+                showError
+                    ('There is a problem searching for the expenses data, please try again later.<br />' +
+                        error);
+
+            } // error
+        });
+    </script>
+
+    <!-- Add expense -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

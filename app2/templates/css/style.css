@@ -11,11 +11,12 @@ body {
 
 .container {
     text-align: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 .exp-spend {
     background: rgba(62, 106, 168, 0.2);
+    border-radius: 10px;
 }
 
 .fa-edit {
@@ -37,8 +38,13 @@ body {
 .header {
     font-size: 50px;
     font-weight: 500;
-    padding-bottom: 30px;
+    padding-bottom: 0px;
+}
+
+.header-month {
     text-transform: uppercase;
+    margin-left: 100px;
+    display: inline;
 }
 
 .money-table {
@@ -58,10 +64,88 @@ body {
 } */
 
 .row {
-    padding: 15px;
+    padding: 10px;
     text-align: center;
+}
+
+.edit-budget {
+    display: inline;
+    float: right;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    /* border: 1px solid #888; */
+    width: 45%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.modal-header {
+    text-align: left;
+    
 }
 
 .money-header {
     font-size: large;
+    text-align: left;
+}
+
+.budget-amount {
+    line-height: 50px;
+    /* background: #fafafa; */
+    /* box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08); */
+    border-color: black;
+    border-radius: 5px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+    transition: all 0.4s ease;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    width: 30vw;
+}
+
+.budget-indicate {
+    margin-left: 3vw;
+    font-size: large;
+    text-align: left;
+    margin-right: 3vw;
+}
+
+.confirm-budget {
+    float: right;
+    margin-top: 30px;
+    margin-right: 3vw;
+    margin-bottom: 2vw;
 }

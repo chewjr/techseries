@@ -102,7 +102,7 @@ def createuser():
         result['message'] = 'An error occurred creating this entry in the user database.'
         return jsonify(result) , 500
 
-@app.route("/search/user=<string:user>")
+@app.route("/search/<string:user>")
 def search_user(user):
     query = User.query.filter_by(id=user).first()
     return jsonify(query.json()), 200
