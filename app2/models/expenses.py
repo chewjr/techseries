@@ -2,14 +2,13 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from os import environ
+from datetime import datetime
 
-import datetime
 import urllib, json, requests
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/techseries'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:3306/techseries'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_ECHO'] = True
 
@@ -66,33 +65,16 @@ def add_expenses_into_expenses_db():
         exp = request.get_json()
 
         user_id = exp["user_id"]
-        created_at = exp["created_at"]
+        created_at = datetime.now()
         category = exp['category']
         name = exp['name']
         amount = exp['amount']
 
-        # budget_exist = Budget.query.filter_by(user_id = user_id, created_at = created_at ).first()
-
-        # if budget_exist:
-        #     budget_exist_json = budget_exist.json()
-        #     budget_exist_json = dict(budget_exist_json)
-        #     # Budget_numshare = budget_exist_json['numshare'] 
-        #     # budget_exist.numshare = int(Budget_numshare) + int(qty)
-        #     Budget_totalprice = budget_exist_json['totalprice']
-        #     budget_exist.totalprice = float(Budget_totalprice) + float(totalprice)
-        #     budget_exist.Budgetprice = (float(Budget_totalprice) + float(totalprice)) / (budget_exist_json['numshare'] + int(qty))
-            
-            
-        #     db.session.commit()
-        #     # new entry
-        #     return jsonify({"budget": [budget.json() for budget in Budget.query.filter_by(user_id = user_id, created_at = created_at)]}), 200
-
-        # else:
         new_exp = Expenses(user_id, created_at, category, name, amount)
         db.session.add(new_exp)
         db.session.commit()
         # new entry
-        return jsonify({"expenses": [expenses.json() for expenses in Expenses.query.filter_by(user_id = user_id)}), 200
+        return jsonify({"expenses": [expenses.json() for expenses in Expenses.query.filter_by(user_id = user_id)]}), 200
 
     except:
         return jsonify({"message":"An error occurred creating this entry in the expenses database."}) , 500
