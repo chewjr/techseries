@@ -74,10 +74,10 @@ def add_expenses_into_expenses_db():
         db.session.add(new_exp)
         db.session.commit()
         # new entry
-        return jsonify({"expenses": [expenses.json() for expenses in Expenses.query.filter_by(user_id = user_id)]}), 200
+        return jsonify({"status": "success", "expenses": [expenses.json() for expenses in Expenses.query.filter_by(user_id = user_id)]}), 200
 
     except:
-        return jsonify({"message":"An error occurred creating this entry in the expenses database."}) , 500
+        return jsonify({"status": "error", "message":"An error occurred creating this entry in the expenses database."}) , 500
 
 
 
