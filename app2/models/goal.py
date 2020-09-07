@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-CORS(app, resources={r"/foo": {"origins": "*"}})
+CORS(app)
 
 class Goal(db.Model):
     __tablename__ = 'goal'
