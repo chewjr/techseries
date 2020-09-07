@@ -12,8 +12,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-cors = CORS(app, resources={r"/foo": {"origins": "*"}})
+CORS(app)
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 
 class Budget(db.Model):
     __tablename__ = 'budget'
@@ -72,8 +73,11 @@ def add_budget_into_budget_db():
         amount = bud['amount']
 
         # get last id, and increment
-        max_id = db.session.query(db.func.max(Budget.id)).scalar()
-        id = max_id + 1
+        try:
+            max_id = db.session.query(db.func.max(Budget.id)).scalar()
+            id = max_id + 1
+        except Exception:
+            id = 1
 
         new_bud = Budget(id, user_id, created_at, amount)
         db.session.add(new_bud)
@@ -138,8 +142,8 @@ def get_month_budget(user_id):
         for budget in Budget.query.filter_by(user_id=user_id):
             if budget.created_at.month == datetime.now().month and budget.created_at.year == datetime.now().year:
                 return jsonify({"status": "success", "budget": budget.json()}), 200
-        return jsonify({"status": "error", "message": "User has not created budget for this month."}), 500
-    return jsonify({"status": "error", "message": "User has no budget created for any month."}), 500
+        return jsonify({"status": "error", "message": "User has not created budget for this month."}), 200
+    return jsonify({"status": "error", "message": "User has no budget created for any month."}), 200
 
 
 

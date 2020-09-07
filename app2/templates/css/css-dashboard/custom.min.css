@@ -2941,7 +2941,8 @@ span.right {
 
 .tile_count {
 	margin-bottom: 20px;
-	margin-top: 20px
+	margin-top: 20px;
+	width: 20vw;
 }
 
 .tile_count .tile_stats_count {

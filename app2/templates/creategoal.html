@@ -40,7 +40,7 @@
                         <div class="col-5">
                             <div class="input-group">
                                 <label class="label">User ID</label>
-                                <input class="input--style-4" type="text" width=100 id="userid" required>
+                                <input class="input--style-4" type="text" width=100 name="userid" id="userid" readonly>
                             </div>
                         </div>
                         <div class="col-2">
@@ -84,9 +84,20 @@
     </div>
 
     <script>
+        function check_id() {
+            var id = sessionStorage["id"];
+            if (typeof id == "undefined") {
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementsByName('userid')[0].value = id;
+            return id;
+        }
+        check_id()
         $('#submit').click(
             // call authenticate function to authenticate user when logging in
             async() => {
+                event.preventDefault();
                 var id = $('#userid').val();
                 var category = $('#cat').val();
                 var amount = $('#target_amount').val();
@@ -105,7 +116,7 @@
                                 body: JSON.stringify({
                                     "id": id,
                                     "category": category,
-                                    "amount": parseInt(amount),
+                                    "amount": parseFloat(amount),
                                     "deadline": deadline
                                 })
                             }

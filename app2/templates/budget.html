@@ -287,7 +287,7 @@
                         }
                     );
                 const data = await response.json();
-                // console.log(data);
+                console.log(data);
                 if (response.ok) {
                     if (data.status == 'success') {
                         // store userid in session 
@@ -295,12 +295,15 @@
                         // after all runs, head to index.html
                         sessionStorage.setItem("budget_id", data.budget.id);
                         sessionStorage.setItem("budget_amount", data.budget.amount);
-                        document.getElementById("budget").innerText = "$" + data.budget.amount;
+                        document.getElementById("budget").innerText = "$" + data.budget.amount.toFixed(2);
                         return data;
+                    } else {
+                        document.getElementById("budget").innerText = "$0.00";
                     }
                 } else {
                     document.getElementById("budget").innerText = "$0.00";
-                }
+
+                } 
             } catch (error) {
                 // showError('Unable to authenticate user');
                 // console.log(error);
@@ -358,9 +361,7 @@
             // call authenticate function to authenticate user when logging in
             async () => {
                 var amount = $('#budget-amount').val();
-
                 var serviceURL = "http://127.0.0.1:5004/budget/month/" + sessionStorage["id"];
-                var rmbme = $('#ckb1').val();
                 try {
                     const response =
                         await fetch(
@@ -368,18 +369,18 @@
                                 method: 'GET',
                                 headers: {
                                     "Content-Type": "application/json",
-
                                 }
                             }
                         );
                     const data = await response.json();
-                    // console.log(data);
+                    console.log(data);
                     if (response.ok) {
                         if (data.status == 'success') {
                             // store userid in session 
                             // sessionStorage.setItem("id", id);
                             // after all runs, head to index.html
                             // window.location.href = 'dashboard.html';
+                            console.log("HELLO");
                             $(async () => {
                                 var editURL = "http://127.0.0.1:5004/edit_budget";
                                 try {
@@ -392,12 +393,12 @@
                                                 },
                                                 body: JSON.stringify({
                                                     "id": parseInt(sessionStorage["budget_id"]),
-                                                    "amount": parseFloat(amount)
+                                                    "amount": parseInt(amount)
                                                 })
                                             }
                                         );
                                     const data = await response.json();
-                                    // console.log(data);
+                                    console.log(data);
                                     if (response.ok) {
                                         if (data.status == 'success') {
                                             // store userid in session 
@@ -413,44 +414,45 @@
                                 }
                             })
                         } else {
-                            alert('Invalid username/password, please try again');
-                        }
-                    } else {
-                        async () => {
-                            // console.log(amount);
-                            // console.log(sessionStorage["id"]);
-                            var serviceURL =
-                                "http://127.0.0.1:5004/add_budget";
-                            try {
-                                const response =
-                                    await fetch(
-                                        serviceURL, {
-                                            method: 'POST',
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                            },
-                                            body: JSON.stringify({
-                                                "user_id": sessionStorage["id"],
-                                                "amount": amount
-                                            })
+                            console.log("hello");
+                            console.log(amount);
+                            $(async () => {
+                                // console.log(amount);
+                                // console.log(sessionStorage["id"]);
+                                var serviceURL =
+                                    "http://127.0.0.1:5004/add_budget";
+                                try {
+                                    const response =
+                                        await fetch(
+                                            serviceURL, {
+                                                method: 'POST',
+                                                headers: {
+                                                    "Content-Type": "application/json",
+                                                },
+                                                body: JSON.stringify({
+                                                    "user_id": sessionStorage["id"],
+                                                    "amount": parseFloat(amount)
+                                                })
+                                            }
+                                        );
+                                    const data = await response.json();
+                                    console.log(data);
+                                    if (response.ok) {
+                                        if (data.status == 'success') {
+                                            // store userid in session 
+                                            // sessionStorage.setItem("id", id);
+                                            // after all runs, head to index.html
+                                            window.location.href = 'budget.html';
+                                        } else {
+                                            alert(data.message);
                                         }
-                                    );
-                                const data = await response.json();
-                                if (response.ok) {
-                                    if (data.status == 'success') {
-                                        // store userid in session 
-                                        // sessionStorage.setItem("id", id);
-                                        // after all runs, head to index.html
-                                        window.location.href = 'budget.html';
-                                    } else {
-                                        alert(data.message);
                                     }
+                                } catch (error) {
+                                    // showError('Unable to authenticate user');
+                                    // console.log(error);
+                                    alert('Error adding budget, please try again');
                                 }
-                            } catch (error) {
-                                // showError('Unable to authenticate user');
-                                // console.log(error);
-                                alert('Error adding budget, please try again');
-                            }
+                            });
                         }
                         // alert('Invalid id, please try again');
                     }
@@ -501,8 +503,13 @@
                     }
                     row += "</tbody>";
                     $('#expenses').append(row);
-                    document.getElementById("expenditure").innerText = "$" + parseFloat(total_spending);
-                    document.getElementById("left-spending").innerText = "$" + (parseFloat(sessionStorage["budget_amount"]) - total_spending);
+                    document.getElementById("expenditure").innerText = "$" + parseFloat(total_spending).toFixed(2);
+                    var remainder = parseFloat(sessionStorage["budget_amount"]) - total_spending;
+                    if (Number.isNaN(remainder)) {
+                        document.getElementById("left-spending").innerText = "$0.00";
+                    } else {
+                        document.getElementById("left-spending").innerText = "$" + (parseFloat(sessionStorage["budget_amount"]) - total_spending).toFixed(2);
+                    }
                 } else {
                     showError('Expense is not found.')
                 }

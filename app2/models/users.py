@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from datetime import datetime
 
 app = Flask(__name__)
@@ -9,8 +9,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-cors = CORS(app, resources={r"/foo": {"origins": "*"}})
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app, resources={r"/foo": {"origins": "null"}})
+CORS(app)
 
 class User(db.Model):
     __tablename__ = "user"
@@ -45,7 +46,7 @@ class User(db.Model):
 
 # authenticate user when logging in
 @app.route("/authenticate", methods=['POST'])
-@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+# @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def authenticate():
     data = request.get_json()
     id = data['id']
@@ -68,7 +69,7 @@ def authenticate():
 
 # create new user and insert into database
 @app.route("/createuser", methods=['POST'])
-@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+# @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def createuser():
     result = {}
     try: 
